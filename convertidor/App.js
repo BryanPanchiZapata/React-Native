@@ -13,6 +13,7 @@ export default function App() {
         style={styles.cajaContenedor}
         onChangeText={onChangedMoneda}
         value={valorConvertir}
+        keyboardType="numeric"
       />
       <StatusBar style="auto" />
 
