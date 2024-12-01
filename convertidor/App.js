@@ -3,7 +3,9 @@ import { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 
 export default function App() {
-  const [valorConvertir, onChangedMoneda] = useState("Ingres el valor en dolares");
+  const [valorConvertir, onChangedMoneda] = useState(
+    "Ingres el valor en dolares"
+  );
   const [resultado, onChangedResult] = useState(0);
   return (
     <View style={styles.container}>
@@ -13,7 +15,7 @@ export default function App() {
         style={styles.cajaContenedor}
         onChangeText={onChangedMoneda}
         value={valorConvertir}
-        keyboardType="numeric"
+        keyboardType="numeric "
       />
       <StatusBar style="auto" />
 
