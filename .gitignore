@@ -1,0 +1,26 @@
+# Ignorar la carpeta node_modules
+node_modules/
+
+# Archivos de Expo
+.expo/
+.expo-shared/
+
+# Archivos generados por React Native
+android/app/build/
+ios/Pods/
+ios/build/
+
+# Otros archivos y carpetas generados
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignorar archivos temporales y de configuración
+*.swp
+*.swo
+*~
+
+# Archivos específicos de macOS
+.DS_Store
