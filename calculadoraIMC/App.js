@@ -12,8 +12,8 @@ import {
 export default function App() {
   const [estatura, onChangeEs] = useState();
   const [peso, onChangePs] = useState();
-  const [resultado, onChangeResult] = useState();
-  const [mensaje, onChangeMessage] = useState();
+  const [resultado, onChangeResult] = useState("");
+  const [mensaje, onChangeMessage] = useState("");
 
   return (
     <View style={styles.container}>
