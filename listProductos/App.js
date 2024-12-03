@@ -256,13 +256,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     padding: 12,
     borderRadius: 10,
-    backgroundColor: "brown",
     flexDirection: "row",
   },
 
   areaContenido: {
     flex: 9,
-    // backgroundColor: "gold",
   },
   areaCabecera: {
     backgroundColor: "white",
@@ -277,23 +275,19 @@ const styles = StyleSheet.create({
   },
 
   itemIndice: {
-    backgroundColor: "green",
     justifyContent: "center",
     marginRight: 5,
   },
   itemProducto: {
-    backgroundColor: "yellow",
     flex: 4,
   },
   itemPrecio: {
-    backgroundColor: "blue",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
   containerButton: {
     flexDirection: "row",
-    // backgroundColor:"green",
     justifyContent: "space-between",
     flex: 1,
     marginLeft: 10,
