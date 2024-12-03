@@ -11,6 +11,8 @@ import {
   ScrollView,
   Alert,
   Keyboard,
+  TouchableOpacity,
+  Modal,
 } from "react-native";
 
 const productos = [
@@ -42,49 +44,75 @@ export default function App() {
   const [precioCompra, setprecioCompra] = useState();
   const [precioVenta, setprecioVenta] = useState();
   const [numElementos, onChangeElementos] = useState(productos.length);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [productoSeleccionado, setProductoSeleccionado] = useState(null);
   const codigoInputRef = useRef(null);
 
-  let ItemsProductos = (props) => {
+  let ItemsProductos = ({ indice, producto }) => {
+    const editarItem = () => {
+      setCodigo(producto.id);
+      setNombre(producto.nombre);
+      setCategoria(producto.categoria);
+      setprecioCompra(producto.precioCompra);
+      setprecioVenta(producto.precioVenta);
+      esNuevo = false;
+      indiceSeleccionado = indice;
+    };
+
+    const confirmarEliminacion = () => {
+      productos.splice(indice, 1); // Elimina el producto
+      onChangeElementos(productos.length); // Actualiza el estado del número de elementos
+      setModalVisible(false); // Cierra el modal
+    };
     return (
-      <View style={styles.itemContainer}>
-        <View style={styles.itemIndice}>
-          <Text style={styles.textoprincipal}>{props.indice}</Text>
-        </View>
-        <View style={styles.itemProducto}>
-          <Text style={styles.nombreProducto}>{props.producto.nombre}</Text>
-          <Text style={styles.nombreProducto}>
-            ({props.producto.categoria})
-          </Text>
-        </View>
-        <View style={styles.itemPrecio}>
-          <Text style={styles.precio}>{props.producto.precioVenta}</Text>
+      <TouchableOpacity onPress={editarItem}>
+        <View style={styles.itemContainer}>
+          <View style={styles.itemIndice}>
+            <Text style={styles.textoprincipal}>{indice}</Text>
+          </View>
+          <View style={styles.itemProducto}>
+            <Text style={styles.nombreProducto}>{producto.nombre}</Text>
+            <Text style={styles.nombreProducto}>({producto.categoria})</Text>
+          </View>
+          <View style={styles.itemPrecio}>
+            <Text style={styles.precio}>{producto.precioVenta}</Text>
+          </View>
+
+          <View style={styles.containerButton}>
+            <Button
+              title="D"
+              onPress={() => {
+                setProductoSeleccionado(producto);
+                setModalVisible(true);
+              }}
+            />
+          </View>
         </View>
 
-        <View style={styles.containerButton}>
-          <Button
-            title="E"
-            onPress={() => {
-              setCodigo(props.producto.id);
-              setNombre(props.producto.nombre);
-              setCategoria(props.producto.categoria);
-              setprecioCompra(props.producto.precioCompra);
-              setprecioVenta(props.producto.precioVenta);
-              esNuevo = false;
-              indiceSeleccionado = props.indice;
-              codigoInputRef.current?.focus();
-            }}
-          />
-          <Button
-            title="X"
-            onPress={() => {
-              indiceSeleccionado = props.indice;
-              productos.splice(indiceSeleccionado, 1);
-              console.log("arreglo productos", productos);
-              onChangeElementos(productos.length);
-            }}
-          />
-        </View>
-      </View>
+        {modalVisible && productoSeleccionado?.id === producto.id && (
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                <Text style={styles.modalText}>
+                  ¿Estás seguro de que deseas eliminar "{producto.nombre}"?
+                </Text>
+                <View style={styles.modalButtons}>
+                  <Button
+                    title="Cancelar"
+                    onPress={() => setModalVisible(false)}
+                  />
+                  <Button title="Confirmar" onPress={confirmarEliminacion} />
+                </View>
+              </View>
+            </View>
+          </Modal>
+        )}
+      </TouchableOpacity>
     );
   };
 
@@ -212,13 +240,8 @@ export default function App() {
         <FlatList
           style={styles.list}
           data={productos}
-          renderItem={(elemento) => {
-            return (
-              <ItemsProductos
-                indice={elemento.index}
-                producto={elemento.item}
-              />
-            );
+          renderItem={({ index, item }) => {
+            return <ItemsProductos indice={index} producto={item} />;
           }}
           keyExtractor={(item) => {
             return item.id;
@@ -309,5 +332,29 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     paddingBottom: 40,
     margin: 20,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Fondo semi-transparente
+  },
+  modalContent: {
+    width: "80%",
+    padding: 20,
+    backgroundColor: "white",
+    borderRadius: 10,
+    alignItems: "center",
+    elevation: 5,
+  },
+  modalText: {
+    fontSize: 16,
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  modalButtons: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
   },
 });
