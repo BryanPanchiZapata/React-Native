@@ -18,7 +18,10 @@ export const ListGrades = ({ navigation }) => {
     return (
       <TouchableHighlight
         onPress={() => {
-          navigation.navigate("GradeForm", { notita: nota, fnRefesh: refreshList });
+          navigation.navigate("GradeForm", {
+            notita: nota,
+            fnRefresh: refreshList,
+          });
         }}
       >
         <ListItem bottomDivider>
@@ -53,7 +56,7 @@ export const ListGrades = ({ navigation }) => {
         title="+"
         placement="right"
         onPress={() => {
-          navigation.navigate("GradeForm", { notita: null });
+          navigation.navigate("GradeForm", { notita: null, fnRefresh: refreshList });
         }}
       />
     </View>

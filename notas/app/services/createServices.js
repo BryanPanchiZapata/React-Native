@@ -24,7 +24,7 @@ export const getGrades = () => {
   console.log(grades);
 }; */
 
-export const updateGrade = (nota) => {
+ export const updateGrade = (nota) => {
   let gradeRetrieve = find(nota.subject);
   if (gradeRetrieve != null) {
     const updatedGrade = { ...gradeRetrieve, grade: nota.grade };
@@ -34,7 +34,7 @@ export const updateGrade = (nota) => {
     }
   }
   console.log(grades);
-};
+}; 
 
 const find = (subject) => {
   for (let i = 0; i < grades.length; i++) {

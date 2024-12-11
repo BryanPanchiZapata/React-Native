@@ -7,6 +7,7 @@ export const GradeForm = ({ navigation, route }) => {
   let isNew = true;
   let subjectR;
   let gradeR;
+  let fnRefesh;
   if (route.params.notita != null) {
     isNew = false;
   }
@@ -32,7 +33,7 @@ export const GradeForm = ({ navigation, route }) => {
       }
 
       navigation.goBack();
-      route.params.fnRefesh();
+      route.params.fnRefresh();
     }
   };
 
