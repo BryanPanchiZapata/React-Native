@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@react-navigation/drawer": "^7.0.20",
+    "react-native": "^0.76.5",
+    "react-native-gesture-handler": "^2.21.2",
+    "react-native-reanimated": "^3.16.5",
+    "react-native-safe-area-context": "^5.0.0"
+  },
+  "devDependencies": {
+    "expo": "^52.0.18"
+  }
+}

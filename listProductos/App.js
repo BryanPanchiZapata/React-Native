@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { useRef } from "react";
@@ -14,6 +15,7 @@ import {
   TouchableOpacity,
   Modal,
 } from "react-native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 const productos = [
   {
@@ -57,6 +59,36 @@ export default function App() {
       setprecioVenta(producto.precioVenta);
       esNuevo = false;
       indiceSeleccionado = indice;
+    };
+
+    const DrawerNav = () => {
+      return (
+        <Drawer.Navigator>
+          <Drawer.Screen
+            name="DrawerProductos"
+            component={ListaProductos}
+            options={{
+              title: "Productos",
+            }}
+          />
+
+          <Drawer.Screen
+            name="DrawerEjemploTabs"
+            component={ListaProductos}
+            options={{
+              title: "Ejemplo tabs",
+            }}
+          />
+
+          <Drawer.Screen
+            name="DrawerFinSesion"
+            component={ListaProductos}
+            options={{
+              title: "Finalizar sesion",
+            }}
+          />
+        </Drawer.Navigator>
+      );
     };
 
     const confirmarEliminacion = () => {
